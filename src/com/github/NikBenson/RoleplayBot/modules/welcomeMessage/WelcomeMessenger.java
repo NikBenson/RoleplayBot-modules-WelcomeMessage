@@ -7,24 +7,29 @@ import com.github.NikBenson.RoleplayBot.configurations.JSONConfigured;
 import com.github.NikBenson.RoleplayBot.messages.MessageFormatter;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.User;
+import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.io.File;
 
 public class WelcomeMessenger implements JSONConfigured {
-	private MessageFormatter<UserContext> messageFormatter;
-	private boolean enabled = false;
+	private final Guild GUILD;
+	private final PlayerManager PLAYER_MANAGER;
 
-	public void sendTo(User user) {
-		if(enabled) {
-			user.openPrivateChannel().queue(channel -> {
-				channel.sendMessage(messageFormatter.createMessage(new UserContext(user))).queue();
-			});
-		}
-	}
+	private MessageFormatter<UserContext> messageFormatter;
 
 	public WelcomeMessenger(Guild guild) {
+		GUILD = guild;
+		PLAYER_MANAGER = Player.getPlayerManager(guild);
+	}
+
+	public void sendTo(User user) {
+		if(GUILD.isMember(user)) {
+			if(!PLAYER_MANAGER.exists(user)) {
+				user.openPrivateChannel().queue(channel -> channel.sendMessage(messageFormatter.createMessage(new UserContext(user))).queue());
+			}
+		}
 	}
 
 	@Override
@@ -33,8 +38,8 @@ public class WelcomeMessenger implements JSONConfigured {
 	}
 
 	@Override
-	public File getConfigPath() {
-		return new File(ConfigurationManager.getInstance().getConfigurationRootPath(), ConfigurationPaths.WELCOME_MESSAGE_FILE);
+	public @NotNull File getConfigPath() {
+		return new File(ConfigurationManager.getInstance().getConfigurationRootPath(GUILD), ConfigurationPaths.WELCOME_MESSAGE_FILE);
 	}
 
 	@Override
@@ -47,7 +52,5 @@ public class WelcomeMessenger implements JSONConfigured {
 		}
 
 		messageFormatter = new MessageFormatter<>(message, values);
-
-		enabled = true;
 	}
 }
