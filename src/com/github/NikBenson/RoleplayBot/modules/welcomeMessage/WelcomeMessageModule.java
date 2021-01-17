@@ -27,11 +27,13 @@ public class WelcomeMessageModule extends ListenerAdapter implements RoleplayBot
 			guild.getJDA().addEventListener(this);
 			initialized = true;
 		}
-		if(ModulesManager.getActive(guild).contains(Player.class)) {
-			if(!messengers.containsKey(guild)) {
-				messengers.put(guild, new WelcomeMessenger(guild));
+		try {
+			if (ModulesManager.getActive(guild).contains(Player.class)) {
+				if (!messengers.containsKey(guild)) {
+					messengers.put(guild, new WelcomeMessenger(guild));
+				}
 			}
-		}
+		} catch (NoClassDefFoundError ignored) {}
 	}
 
 	@Override
