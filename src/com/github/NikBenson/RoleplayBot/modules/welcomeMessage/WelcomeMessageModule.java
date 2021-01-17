@@ -2,6 +2,7 @@ package com.github.NikBenson.RoleplayBot.modules.welcomeMessage;
 
 import com.github.NikBenson.RoleplayBot.modules.ModulesManager;
 import com.github.NikBenson.RoleplayBot.modules.RoleplayBotModule;
+import com.github.NikBenson.RoleplayBot.modules.player.Player;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -10,10 +11,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WelcomeMessage extends ListenerAdapter implements RoleplayBotModule {
+public class WelcomeMessageModule extends ListenerAdapter implements RoleplayBotModule {
 	private boolean initialized;
 
-	private Map<Guild, WelcomeMessenger> messengers = new HashMap<>();
+	private final Map<Guild, WelcomeMessenger> messengers = new HashMap<>();
 
 	@Override
 	public boolean isActive(Guild guild) {
@@ -35,9 +36,7 @@ public class WelcomeMessage extends ListenerAdapter implements RoleplayBotModule
 
 	@Override
 	public void unload(Guild guild) {
-		if(messengers.containsKey(guild)) {
-			messengers.remove(guild);
-		}
+		messengers.remove(guild);
 	}
 
 	@Override

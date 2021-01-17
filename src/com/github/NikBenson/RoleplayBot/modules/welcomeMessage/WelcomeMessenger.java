@@ -5,6 +5,8 @@ import com.github.NikBenson.RoleplayBot.configurations.ConfigurationManager;
 import com.github.NikBenson.RoleplayBot.configurations.ConfigurationPaths;
 import com.github.NikBenson.RoleplayBot.configurations.JSONConfigured;
 import com.github.NikBenson.RoleplayBot.messages.MessageFormatter;
+import com.github.NikBenson.RoleplayBot.modules.player.Player;
+import com.github.NikBenson.RoleplayBot.modules.player.PlayerEventListener;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.User;
 import org.jetbrains.annotations.NotNull;
@@ -13,23 +15,22 @@ import org.json.simple.JSONObject;
 
 import java.io.File;
 
-public class WelcomeMessenger implements JSONConfigured {
+public class WelcomeMessenger implements JSONConfigured, PlayerEventListener {
 	private final Guild GUILD;
-	private final PlayerManager PLAYER_MANAGER;
 
 	private MessageFormatter<UserContext> messageFormatter;
 
 	public WelcomeMessenger(Guild guild) {
 		GUILD = guild;
-		PLAYER_MANAGER = Player.getPlayerManager(guild);
+	}
+
+	@Override
+	public void onPlayerCreate(Player player) {
+		sendTo(player.getUser());
 	}
 
 	public void sendTo(User user) {
-		if(GUILD.isMember(user)) {
-			if(!PLAYER_MANAGER.exists(user)) {
-				user.openPrivateChannel().queue(channel -> channel.sendMessage(messageFormatter.createMessage(new UserContext(user))).queue());
-			}
-		}
+		user.openPrivateChannel().queue(channel -> channel.sendMessage(messageFormatter.createMessage(new UserContext(user))).queue());
 	}
 
 	@Override

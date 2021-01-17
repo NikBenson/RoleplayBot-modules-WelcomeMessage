@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="RoleplayBot" level="project" />
+    <orderEntry type="library" name="Player" level="project" />
   </component>
 </module>
