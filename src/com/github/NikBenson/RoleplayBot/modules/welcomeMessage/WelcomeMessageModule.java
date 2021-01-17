@@ -1,5 +1,6 @@
 package com.github.NikBenson.RoleplayBot.modules.welcomeMessage;
 
+import com.github.NikBenson.RoleplayBot.configurations.ConfigurationManager;
 import com.github.NikBenson.RoleplayBot.modules.ModulesManager;
 import com.github.NikBenson.RoleplayBot.modules.RoleplayBotModule;
 import com.github.NikBenson.RoleplayBot.modules.player.Player;
@@ -7,7 +8,9 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
+import org.json.simple.parser.ParseException;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +33,15 @@ public class WelcomeMessageModule extends ListenerAdapter implements RoleplayBot
 		try {
 			if (ModulesManager.getActive(guild).contains(Player.class)) {
 				if (!messengers.containsKey(guild)) {
-					messengers.put(guild, new WelcomeMessenger(guild));
+					WelcomeMessenger welcomeMessenger = new WelcomeMessenger(guild);
+					ConfigurationManager configurationManager = ConfigurationManager.getInstance();
+
+					configurationManager.registerConfiguration(welcomeMessenger);
+					try {
+						configurationManager.load(welcomeMessenger);
+					} catch (Exception ignored) {}
+
+					messengers.put(guild, welcomeMessenger);
 				}
 			}
 		} catch (NoClassDefFoundError ignored) {}
