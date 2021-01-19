@@ -8,9 +8,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
-import org.json.simple.parser.ParseException;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,6 +48,11 @@ public class WelcomeMessageModule extends ListenerAdapter implements RoleplayBot
 	@Override
 	public void unload(Guild guild) {
 		messengers.remove(guild);
+	}
+
+	@Override
+	public Guild[] getLoaded() {
+		return messengers.keySet().toArray(new Guild[0]);
 	}
 
 	@Override

@@ -52,6 +52,11 @@ public class WelcomeMessenger implements JSONConfigured, PlayerEventListener {
 			values[i] = (String) valuesJSON.get(i);
 		}
 
-		messageFormatter = new MessageFormatter<>(message, values);
+		messageFormatter = new MessageFormatter<>(UserContext.class, message, values);
+	}
+
+	@Override
+	public Guild getGuild() {
+		return GUILD;
 	}
 }
