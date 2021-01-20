@@ -26,10 +26,12 @@ public class WelcomeMessenger implements JSONConfigured, PlayerEventListener {
 
 	@Override
 	public void onPlayerCreate(Player player) {
+		System.out.println("called");
 		sendTo(player.getUser());
 	}
 
 	public void sendTo(User user) {
+		System.out.printf("Sending to: %s%n", user.getId());
 		user.openPrivateChannel().queue(channel -> channel.sendMessage(messageFormatter.createMessage(new UserContext(user))).queue());
 	}
 
@@ -45,6 +47,8 @@ public class WelcomeMessenger implements JSONConfigured, PlayerEventListener {
 
 	@Override
 	public void loadFromJSON(JSONObject json) {
+		System.out.println(json.toJSONString());
+
 		String message = (String) json.get("message");
 		JSONArray valuesJSON = (JSONArray) json.get("values");
 		String[] values = new String[valuesJSON.size()];
