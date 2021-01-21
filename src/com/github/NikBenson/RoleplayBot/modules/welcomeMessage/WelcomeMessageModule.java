@@ -12,6 +12,8 @@ import java.util.Map;
 public class WelcomeMessageModule implements RoleplayBotModule {
 	private final Map<Guild, WelcomeMessenger> messengers = new HashMap<>();
 
+	public WelcomeMessageModule() {}
+
 	@Override
 	public boolean isActive(Guild guild) {
 		return messengers.containsKey(guild);
