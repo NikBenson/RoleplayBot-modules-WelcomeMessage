@@ -1,12 +1,12 @@
-package com.github.NikBenson.RoleplayBot.modules.welcomeMessage;
+package com.github.nikbenson.roleplaybot.modules.welcomeMessage;
 
-import com.github.NikBenson.RoleplayBot.commands.context.UserContext;
-import com.github.NikBenson.RoleplayBot.configurations.ConfigurationManager;
-import com.github.NikBenson.RoleplayBot.configurations.ConfigurationPaths;
-import com.github.NikBenson.RoleplayBot.configurations.JSONConfigured;
-import com.github.NikBenson.RoleplayBot.messages.MessageFormatter;
-import com.github.NikBenson.RoleplayBot.modules.player.Player;
-import com.github.NikBenson.RoleplayBot.modules.player.PlayerEventListener;
+import com.github.nikbenson.roleplaybot.commands.context.UserContext;
+import com.github.nikbenson.roleplaybot.configurations.ConfigurationManager;
+import com.github.nikbenson.roleplaybot.configurations.ConfigurationPaths;
+import com.github.nikbenson.roleplaybot.configurations.JSONConfigured;
+import com.github.nikbenson.roleplaybot.messages.MessageFormatter;
+import com.github.nikbenson.roleplaybot.modules.player.Player;
+import com.github.nikbenson.roleplaybot.modules.player.PlayerEventListener;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.User;
 import org.jetbrains.annotations.NotNull;
