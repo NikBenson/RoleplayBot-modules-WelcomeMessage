@@ -1,4 +1,4 @@
-package com.github.nikbenson.RoleplayBot.modules.welcomemessage;
+package com.github.nikbenson.roleplaybot.modules.welcomemessage;
 
 import com.github.nikbenson.roleplaybot.modules.player.PlayerModule;
 import com.github.nikbenson.roleplaybot.configurations.ConfigurationManager;
@@ -21,7 +21,7 @@ public class WelcomeMessageModule implements RoleplayBotModule {
 
 	@Override
 	public void load(Guild guild) {
-		PlayerModule playerModule = (PlayerModule) ModulesManager.require("com.github.NikBenson.RoleplayBot.modules.player.PlayerModule");
+		PlayerModule playerModule = (PlayerModule) ModulesManager.require("com.github.nikbenson.roleplaybot.modules.player.PlayerModule");
 
 		if (!messengers.containsKey(guild)) {
 			WelcomeMessenger welcomeMessenger = new WelcomeMessenger(guild);

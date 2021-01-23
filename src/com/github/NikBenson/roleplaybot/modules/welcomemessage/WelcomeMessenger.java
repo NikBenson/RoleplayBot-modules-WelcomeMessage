@@ -1,4 +1,4 @@
-package com.github.nikbenson.RoleplayBot.modules.welcomemessage;
+package com.github.nikbenson.roleplaybot.modules.welcomemessage;
 
 import com.github.nikbenson.roleplaybot.commands.context.UserContext;
 import com.github.nikbenson.roleplaybot.configurations.ConfigurationManager;
