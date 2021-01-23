@@ -1,9 +1,9 @@
-package com.github.nikbenson.roleplaybot.modules.welcomeMessage;
+package com.github.NikBenson.RoleplayBot.modules.welcomemessage;
 
+import com.github.nikbenson.roleplaybot.modules.player.PlayerModule;
 import com.github.nikbenson.roleplaybot.configurations.ConfigurationManager;
 import com.github.nikbenson.roleplaybot.modules.ModulesManager;
 import com.github.nikbenson.roleplaybot.modules.RoleplayBotModule;
-import com.github.nikbenson.roleplaybot.modules.player.PlayerModule;
 import net.dv8tion.jda.api.entities.Guild;
 
 import java.util.HashMap;
